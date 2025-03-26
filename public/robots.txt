@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://pastesapp.vercel.app/sitemap.xml
