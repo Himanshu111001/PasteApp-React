@@ -10,6 +10,13 @@
 <url>
   <loc>https://pastesapp.vercel.app/</loc>
   <lastmod>2025-03-26T10:58:33+00:00</lastmod>
+  <priority>1.0</priority>
+</url>
+
+<url>
+    <loc>https://pastesapp.vercel.app/pastes</loc>
+    <lastmod>2025-03-26T10:58:33+00:00</lastmod>
+    <priority>0.8</priority>
 </url>
 
 
