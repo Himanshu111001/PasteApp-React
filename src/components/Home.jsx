@@ -137,7 +137,7 @@ const Home = () => {
             style={{
               caretColor: "#000",
             }}
-            rows={20}
+            rows={10}
           />
         </div>
 
