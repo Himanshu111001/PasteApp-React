@@ -55,26 +55,30 @@ const Home = () => {
     <div className="w-full h-full py-10 max-w-[1200px] mx-auto px-5 lg:px-0">
       <div className="flex flex-col gap-y-5 items-start">
         <header className="text-left mb-6">
-          <h1 className="text-4xl font-extrabold text-gray-900 dark:text-white m-0 tracking-tight">
+          <h1 className="text-3xl md:text-4xl font-extrabold text-gray-900 dark:text-white m-0 tracking-tight">
             📄 PastesApp
           </h1>
-          <p className="text-gray-600 dark:text-gray-400 mt-2 m-0 text-lg">
+          <p className="text-gray-600 dark:text-gray-400 mt-2 m-0 text-base md:text-lg">
             ✍️ Store and share text snippets, notes, and code securely. 🔒
           </p>
         </header>
 
         <div className="w-full flex flex-col md:flex-row gap-3 md:gap-x-4 justify-between items-stretch md:items-center">
+          <label htmlFor="paste-title" className="sr-only">Paste Title</label>
           <input
+            id="paste-title"
             type="text"
             placeholder="Enter Title..."
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             className="flex-grow text-black dark:text-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-lg p-3 focus:ring-2 focus:ring-blue-500 outline-none transition-all w-full md:w-auto"
+            aria-label="Paste Title Input"
           />
           <div className="flex flex-row gap-x-3 shrink-0">
             <button
-              className="flex-grow md:flex-grow-0 text-white bg-blue-600 hover:bg-blue-700 font-semibold rounded-lg text-sm px-6 py-3 transition-colors shadow-md whitespace-nowrap"
+              className="flex-grow md:flex-grow-0 text-white bg-blue-600 hover:bg-blue-700 font-semibold rounded-lg text-xs md:text-sm px-4 md:px-6 py-3 transition-colors shadow-md"
               onClick={createPaste}
+              aria-label={pasteId ? "Update Paste Content" : "Create New Paste"}
             >
               {pasteId ? "Update Paste" : "Create My Paste"}
             </button>
@@ -84,6 +88,7 @@ const Home = () => {
                 className="text-white bg-red-500 hover:bg-red-600 font-medium rounded-lg text-sm px-4 py-3 transition-colors shadow-md"
                 onClick={resetPaste}
                 title="Reset Field"
+                aria-label="Reset Paste Form"
               >
                 <PlusCircle size={20} />
               </button>
@@ -104,17 +109,21 @@ const Home = () => {
                 navigator.clipboard.writeText(value);
                 toast.success("Copied to Clipboard");
               }}
+              aria-label="Copy code to clipboard"
             >
               <Copy className="text-gray-600 dark:text-gray-400 group-hover:text-blue-500" size={20} />
             </button>
           </div>
 
+          <label htmlFor="paste-content" className="sr-only">Paste Content</label>
           <textarea
+            id="paste-content"
             value={value}
             onChange={(e) => setValue(e.target.value)}
             placeholder="Write Your Content Here...."
             className="w-full p-4 dark:bg-gray-800 dark:text-white focus:outline-none resize-none"
             rows={12}
+            aria-label="Paste Content Area"
           />
         </div>
 
