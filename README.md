@@ -211,4 +211,4 @@ This project has been significantly upgraded with modern features and structural
 
 ---
 
-# PasteApp-React
+# PastesApp-React

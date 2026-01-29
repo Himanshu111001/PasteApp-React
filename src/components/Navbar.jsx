@@ -22,11 +22,13 @@ const Navbar = () => {
     <nav className="w-full h-[70px] flex justify-center items-center p-4 bg-gray-800/90 dark:bg-black/90 backdrop-blur-md sticky top-0 z-50 border-b border-gray-700 dark:border-gray-800 transition-all duration-300">
       <div className="w-full max-w-[1200px] flex justify-between items-center px-4 lg:px-0">
         {/* Logo Section */}
-        <Link to="/" className="flex items-center gap-4 group">
-          <div className="bg-white dark:bg-gray-800 p-2 rounded-2xl shadow-md group-hover:shadow-lg transition-all">
-            <img src={logo} alt="Logo" className="w-12 h-12 object-contain group-hover:scale-105 transition-transform" />
-          </div>
-          <span className="text-white font-extrabold text-3xl tracking-tighter">PasteApp</span>
+        <Link to="/" className="flex items-center gap-2 group">
+          <img
+            src={logo}
+            alt="Logo"
+            className="w-14 h-14 object-contain group-hover:scale-110 transition-transform duration-300 shadow-sm rounded-xl"
+          />
+          <span className="text-white font-extrabold text-3xl tracking-tighter ml-1">PastesApp</span>
         </Link>
 
         {/* Links & Actions */}
