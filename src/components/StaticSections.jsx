@@ -68,10 +68,10 @@ const StaticSections = () => {
                         </p>
                         <div className="mt-8 flex items-center gap-4 border-t border-blue-100 dark:border-blue-800/50 pt-4">
                             <div className="w-12 h-12 rounded-full bg-gradient-to-tr from-blue-500 to-indigo-600 shadow-md flex items-center justify-center text-white font-bold">
-                                JD
+                                HS
                             </div>
                             <div>
-                                <p className="font-bold text-gray-800 dark:text-gray-100">John Doe</p>
+                                <p className="font-bold text-gray-800 dark:text-gray-100">Himanshu Shishodia</p>
                                 <div className="flex items-center gap-1">
                                     <span className="text-yellow-500">⭐⭐⭐⭐⭐</span>
                                     <p className="text-gray-500 dark:text-gray-500 text-xs">Verified User</p>

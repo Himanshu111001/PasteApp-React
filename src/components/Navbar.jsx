@@ -6,7 +6,7 @@ import logo from "../assets/logo.png";
 
 const Navbar = () => {
   const [dark, setDark] = useState(
-    localStorage.getItem("darkMode") === "true"
+    localStorage.getItem("darkMode") !== "false"
   );
 
   useEffect(() => {
