@@ -55,10 +55,10 @@ const Home = () => {
     <div className="w-full h-full py-10 max-w-[1200px] mx-auto px-5 lg:px-0">
       <div className="flex flex-col gap-y-5 items-start">
         <header className="text-left mb-6">
-          <h1 className="text-4xl font-extrabold text-gray-900 dark:text-white m-0 tracking-tight">
+          <h1 className="text-3xl md:text-4xl font-extrabold text-gray-900 dark:text-white m-0 tracking-tight">
             📄 PastesApp
           </h1>
-          <p className="text-gray-600 dark:text-gray-400 mt-2 m-0 text-lg">
+          <p className="text-gray-600 dark:text-gray-400 mt-2 m-0 text-base md:text-lg">
             ✍️ Store and share text snippets, notes, and code securely. 🔒
           </p>
         </header>
@@ -73,7 +73,7 @@ const Home = () => {
           />
           <div className="flex flex-row gap-x-3 shrink-0">
             <button
-              className="flex-grow md:flex-grow-0 text-white bg-blue-600 hover:bg-blue-700 font-semibold rounded-lg text-sm px-6 py-3 transition-colors shadow-md whitespace-nowrap"
+              className="flex-grow md:flex-grow-0 text-white bg-blue-600 hover:bg-blue-700 font-semibold rounded-lg text-xs md:text-sm px-4 md:px-6 py-3 transition-colors shadow-md"
               onClick={createPaste}
             >
               {pasteId ? "Update Paste" : "Create My Paste"}

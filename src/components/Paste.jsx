@@ -43,21 +43,21 @@ const Paste = () => {
               filteredPastes.map((paste) => (
                 <div
                   key={paste?._id}
-                  className="border border-gray-200 dark:border-gray-700 w-full gap-y-6 justify-between flex flex-col sm:flex-row p-5 rounded-xl hover:shadow-md transition-shadow"
+                  className="border border-gray-200 dark:border-gray-700 w-full flex flex-col sm:flex-row justify-between p-4 md:p-6 rounded-xl hover:shadow-md transition-shadow gap-y-4"
                 >
                   {/* heading and Description */}
-                  <div className="w-full sm:w-[60%] flex flex-col space-y-3">
-                    <p className="text-3xl font-bold text-gray-800 dark:text-gray-100">
+                  <div className="w-full sm:w-[65%] flex flex-col space-y-2">
+                    <p className="text-2xl md:text-3xl font-bold text-gray-800 dark:text-gray-100">
                       {paste?.title}
                     </p>
-                    <p className="text-base font-normal line-clamp-3 text-gray-600 dark:text-gray-400">
+                    <p className="text-sm md:text-base font-normal line-clamp-3 text-gray-600 dark:text-gray-400">
                       {paste?.content}
                     </p>
                   </div>
 
                   {/* icons */}
-                  <div className="flex flex-col gap-y-4 sm:items-end justify-between">
-                    <div className="flex gap-2 flex-wrap sm:flex-nowrap">
+                  <div className="flex flex-col gap-y-4 sm:items-end justify-between shrink-0">
+                    <div className="flex flex-wrap gap-2">
                       <button className="p-2 rounded-lg bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 hover:border-blue-500 dark:hover:border-blue-500 transition-colors group">
                         <Link to={`/?pasteId=${paste?._id}`}>
                           <PencilLine
