@@ -28,7 +28,7 @@ const Navbar = () => {
             alt="Logo"
             className="w-14 h-14 object-contain group-hover:scale-110 transition-transform duration-300 shadow-sm rounded-xl"
           />
-          <span className="text-white font-extrabold text-3xl tracking-tighter ml-1">PastesApp</span>
+          <span className="text-white font-bold text-2xl tracking-tight ml-1">PastesApp</span>
         </Link>
 
         {/* Links & Actions */}
