@@ -35,9 +35,9 @@ const Paste = () => {
 
         {/* All Pastes */}
         <div className="flex flex-col border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 py-6 rounded-xl shadow-lg">
-          <h2 className="px-6 text-4xl font-bold border-b border-gray-300 dark:border-gray-700 pb-4 text-gray-900 dark:text-gray-100">
+          <h1 className="px-6 text-4xl font-bold border-b border-gray-300 dark:border-gray-700 pb-4 text-gray-900 dark:text-gray-100">
             All Pastes
-          </h2>
+          </h1>
           <div className="w-full px-6 pt-6 flex flex-col gap-y-6">
             {filteredPastes.length > 0 ? (
               filteredPastes.map((paste) => (
@@ -47,9 +47,9 @@ const Paste = () => {
                 >
                   {/* heading and Description */}
                   <div className="w-full sm:w-[65%] flex flex-col space-y-2">
-                    <p className="text-2xl md:text-3xl font-bold text-gray-800 dark:text-gray-100">
+                    <h2 className="text-2xl md:text-3xl font-bold text-gray-800 dark:text-gray-100">
                       {paste?.title}
-                    </p>
+                    </h2>
                     <p className="text-sm md:text-base font-normal line-clamp-3 text-gray-600 dark:text-gray-400">
                       {paste?.content}
                     </p>
@@ -58,7 +58,10 @@ const Paste = () => {
                   {/* icons */}
                   <div className="flex flex-col gap-y-4 sm:items-end justify-between shrink-0">
                     <div className="flex flex-wrap gap-2">
-                      <button className="p-2 rounded-lg bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 hover:border-blue-500 dark:hover:border-blue-500 transition-colors group">
+                      <button
+                        className="p-2 rounded-lg bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 hover:border-blue-500 dark:hover:border-blue-500 transition-colors group"
+                        aria-label="Edit Paste"
+                      >
                         <Link to={`/?pasteId=${paste?._id}`}>
                           <PencilLine
                             className="text-gray-600 dark:text-gray-300 group-hover:text-blue-500"
@@ -69,6 +72,7 @@ const Paste = () => {
                       <button
                         className="p-2 rounded-lg bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 hover:border-pink-500 dark:hover:border-pink-500 transition-colors group"
                         onClick={() => handleDelete(paste?._id)}
+                        aria-label="Delete Paste"
                       >
                         <Trash2
                           className="text-gray-600 dark:text-gray-300 group-hover:text-pink-500"
@@ -76,7 +80,10 @@ const Paste = () => {
                         />
                       </button>
 
-                      <button className="p-2 rounded-lg bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 hover:border-orange-500 dark:hover:border-orange-500 transition-colors group">
+                      <button
+                        className="p-2 rounded-lg bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 hover:border-orange-500 dark:hover:border-orange-500 transition-colors group"
+                        aria-label="View Paste"
+                      >
                         <Link to={`/pastes/${paste?._id}`}>
                           <Eye
                             className="text-gray-600 dark:text-gray-300 group-hover:text-orange-500"
@@ -90,6 +97,7 @@ const Paste = () => {
                           navigator.clipboard.writeText(paste?.content);
                           toast.success("Copied to Clipboard");
                         }}
+                        aria-label="Copy Content"
                       >
                         <Copy
                           className="text-gray-600 dark:text-gray-300 group-hover:text-green-500"

@@ -27,13 +27,11 @@ const ViewPaste = () => {
   return (
     <div className="w-full h-full py-10 max-w-[1200px] mx-auto px-5 lg:px-0">
       <div className="flex flex-col gap-y-5 items-start">
-        <input
-          type="text"
-          placeholder="Title"
-          value={paste.title}
-          disabled
-          className="w-full text-gray-900 dark:text-white bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-lg p-3 shadow-sm"
-        />
+        <div className="w-full">
+          <h1 className="w-full text-gray-900 dark:text-white bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-lg p-3 shadow-sm font-semibold">
+            {paste.title}
+          </h1>
+        </div>
         <div className="w-full flex flex-col items-start relative rounded-xl bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-xl overflow-hidden">
           <div className="w-full flex items-center justify-between px-4 py-3 border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900/50">
             <div className="flex gap-x-2 items-center">
