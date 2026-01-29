@@ -63,30 +63,32 @@ const Home = () => {
           </p>
         </header>
 
-        <div className="w-full flex flex-row gap-x-4 justify-between items-center">
+        <div className="w-full flex flex-col md:flex-row gap-3 md:gap-x-4 justify-between items-stretch md:items-center">
           <input
             type="text"
             placeholder="Enter Title..."
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-            className={`${pasteId ? "w-[75%]" : "w-[85%]"
-              } text-black dark:text-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-lg p-3 focus:ring-2 focus:ring-blue-500 outline-none transition-all`}
+            className="flex-grow text-black dark:text-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-lg p-3 focus:ring-2 focus:ring-blue-500 outline-none transition-all w-full md:w-auto"
           />
-          <button
-            className="text-white bg-blue-600 hover:bg-blue-700 font-semibold rounded-lg text-sm px-6 py-3 transition-colors shadow-md"
-            onClick={createPaste}
-          >
-            {pasteId ? "Update Paste" : "Create My Paste"}
-          </button>
-
-          {pasteId && (
+          <div className="flex flex-row gap-x-3 shrink-0">
             <button
-              className="text-white bg-red-500 hover:bg-red-600 font-medium rounded-lg text-sm px-4 py-3 transition-colors shadow-md"
-              onClick={resetPaste}
+              className="flex-grow md:flex-grow-0 text-white bg-blue-600 hover:bg-blue-700 font-semibold rounded-lg text-sm px-6 py-3 transition-colors shadow-md whitespace-nowrap"
+              onClick={createPaste}
             >
-              <PlusCircle size={20} />
+              {pasteId ? "Update Paste" : "Create My Paste"}
             </button>
-          )}
+
+            {pasteId && (
+              <button
+                className="text-white bg-red-500 hover:bg-red-600 font-medium rounded-lg text-sm px-4 py-3 transition-colors shadow-md"
+                onClick={resetPaste}
+                title="Reset Field"
+              >
+                <PlusCircle size={20} />
+              </button>
+            )}
+          </div>
         </div>
 
         <div className="w-full flex flex-col items-start relative rounded-xl bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-xl overflow-hidden">
