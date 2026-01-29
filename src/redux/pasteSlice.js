@@ -22,7 +22,7 @@ const pasteSlice = createSlice({
       }
       // If the course is not in the Pastes, add it to the Pastes
       state.pastes.push(paste)
-      
+
       // Update to localstorage
       localStorage.setItem("pastes", JSON.stringify(state.pastes))
       // show toast
@@ -62,9 +62,13 @@ const pasteSlice = createSlice({
       // Update to localstorage
       localStorage.removeItem("pastes")
     },
+    setPastes: (state, action) => {
+      state.pastes = action.payload;
+      localStorage.setItem("pastes", JSON.stringify(state.pastes));
+    }
   },
 })
 
-export const { addToPastes, removeFromPastes, updatePastes } = pasteSlice.actions
+export const { addToPastes, removeFromPastes, updatePastes, setPastes } = pasteSlice.actions
 
 export default pasteSlice.reducer

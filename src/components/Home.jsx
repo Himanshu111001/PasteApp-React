@@ -6,28 +6,51 @@ import { addToPastes, updatePastes } from "../redux/pasteSlice";
 import { useSearchParams } from "react-router-dom";
 import StaticSections from "./StaticSections";
 
+import { supabase } from "../supabase";
+
 const Home = () => {
   const [value, setValue] = useState("");
   const [title, setTitle] = useState("");
   const [searchParams, setSearchParams] = useSearchParams();
   const pasteId = searchParams.get("pasteId");
   const pastes = useSelector((state) => state.paste.pastes);
+  const { user } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 
-  const createPaste = () => {
+  const createPaste = async () => {
+    const pId = pasteId || crypto.randomUUID();
     const paste = {
       title: title,
       content: value,
-      _id:
-        pasteId ||
-        (crypto.randomUUID ? crypto.randomUUID() : Date.now().toString(36) + Math.random().toString(36).substring(2)),
+      _id: pId,
       createdAt: new Date().toISOString(),
     };
 
+    // 1. Update Redux (Local-First)
     if (pasteId) {
       dispatch(updatePastes(paste));
     } else {
       dispatch(addToPastes(paste));
+    }
+
+    // 2. Cloud Sync (if logged in)
+    if (user) {
+      const { error } = await supabase
+        .from('pastes')
+        .upsert({
+          id: pId,
+          user_id: user.id,
+          title: title,
+          content: value,
+          created_at: paste.createdAt
+        });
+
+      if (error) {
+        console.error("Cloud sync failed:", error.message);
+        toast.error("Saved locally (Sync pending)");
+      } else {
+        // toast.success("Synced to cloud");
+      }
     }
 
     setTitle("");

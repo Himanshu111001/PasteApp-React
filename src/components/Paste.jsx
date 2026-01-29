@@ -5,14 +5,29 @@ import { useState } from "react"; // Import useState
 import { removeFromPastes } from "../redux/pasteSlice";
 import { FormatDate } from "../utils/formatDate";
 import { Link, useNavigate } from "react-router-dom";
+import { supabase } from "../supabase";
 
 const Paste = () => {
   const pastes = useSelector((state) => state.paste.pastes);
+  const { user } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const [searchTerm, setSearchTerm] = useState("");
 
-  const handleDelete = (id) => {
+  const handleDelete = async (id) => {
+    // 1. Remove from Redux/Local
     dispatch(removeFromPastes(id));
+
+    // 2. Remove from Cloud
+    if (user) {
+      const { error } = await supabase
+        .from('pastes')
+        .delete()
+        .eq('id', id);
+
+      if (error) {
+        console.error("Cloud delete failed:", error.message);
+      }
+    }
   };
 
   const filteredPastes = pastes.filter((paste) =>

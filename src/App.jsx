@@ -9,8 +9,10 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { supabase } from "./supabase";
 import { setSession } from "./redux/authSlice";
+import { setPastes } from "./redux/pasteSlice";
 
 const router = createBrowserRouter([
+  // ... existing routes
   {
     path: "/",
     element: (
@@ -53,16 +55,39 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    const fetchCloudPastes = async (userId) => {
+      const { data, error } = await supabase
+        .from('pastes')
+        .select('*')
+        .eq('user_id', userId)
+        .order('created_at', { ascending: false });
+
+      if (data && !error) {
+        const formattedPastes = data.map(p => ({
+          ...p,
+          _id: p.id,
+          createdAt: p.created_at
+        }));
+        dispatch(setPastes(formattedPastes));
+      }
+    };
+
     // 1. Check current session
     supabase.auth.getSession().then(({ data: { session } }) => {
       dispatch(setSession(session));
+      if (session?.user) {
+        fetchCloudPastes(session.user.id);
+      }
     });
 
     // 2. Listen for auth changes
     const {
       data: { subscription },
-    } = supabase.auth.onAuthStateChange((_event, session) => {
+    } = supabase.auth.onAuthStateChange((event, session) => {
       dispatch(setSession(session));
+      if (session?.user) {
+        fetchCloudPastes(session.user.id);
+      }
     });
 
     return () => subscription.unsubscribe();
