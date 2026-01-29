@@ -3,33 +3,43 @@ import Home from "./components/Home";
 import Paste from "./components/Paste";
 import ViewPaste from "./components/ViewPaste";
 import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
 import { Analytics } from "@vercel/analytics/react";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: (
-      <div className="w-full h-full flex flex-col">
+      <div className="w-full min-h-screen flex flex-col bg-white dark:bg-gray-900 transition-colors duration-300">
         <Navbar />
-        <Home />
+        <div className="flex-grow flex flex-col">
+          <Home />
+        </div>
+        <Footer />
       </div>
     ),
   },
   {
     path: "/pastes",
     element: (
-      <div className="w-full h-full flex flex-col">
+      <div className="w-full min-h-screen flex flex-col bg-white dark:bg-gray-900 transition-colors duration-300">
         <Navbar />
-        <Paste />
+        <div className="flex-grow flex flex-col">
+          <Paste />
+        </div>
+        <Footer />
       </div>
     ),
   },
   {
     path: "/pastes/:id",
     element: (
-      <div className="w-full h-full flex flex-col">
+      <div className="w-full min-h-screen flex flex-col bg-white dark:bg-gray-900 transition-colors duration-300">
         <Navbar />
-        <ViewPaste />
+        <div className="flex-grow flex flex-col">
+          <ViewPaste />
+        </div>
+        <Footer />
       </div>
     ),
   },
