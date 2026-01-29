@@ -190,4 +190,25 @@ export default {
 This template sets up a React project with Vite, ESLint, Tailwind CSS, and Redux Toolkit for state management. With this setup, you can quickly start building modern, scalable web applications. Feel free to customize it further according to your project requirements!
 
 ---
+
+## 🚀 Version 2 - Major Update
+
+This project has been significantly upgraded with modern features and structural improvements:
+
+### 🌟 New Features
+- **🌓 Dynamic Dark Mode**: Full dark mode support with a theme toggle in the Navbar and persistence via `localStorage`.
+- **🛡️ Enhanced Security**: Switched to Web Crypto API (`crypto.randomUUID()`) for collision-resistant unique identifiers.
+- **🚥 Improved Navigation**: Migrated from anchor tags to React Router `Link` components for true SPA behavior (no page reloads).
+- **🎨 Premium UI/UX**: 
+  - Redesigned paste cards with smooth hover effects, better shadows, and responsive layouts.
+  - Custom color palette (`chileanFire`) integrated into Tailwind configuration.
+- **🧩 Robust Error Handling**: Added a dedicated "Paste Not Found" (404) state for non-existent paste IDs.
+
+### 🏗️ Structural Changes
+- **Component Refactoring**: Extracted marketing and testimonial sections into `StaticSections.jsx`.
+- **Directory Consistency**: Fixed typographical errors in folder naming (`src/utils` rename).
+- **Code Optimization**: Replaced array filtering logic with high-performance `.find()` for item lookups.
+
+---
+
 # PasteApp-React
