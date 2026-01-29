@@ -1,14 +1,20 @@
 import { NavbarData } from "../data/Navbar";
 import { NavLink, Link } from "react-router-dom";
-import { Moon, Sun, Menu, X } from "lucide-react";
+import { Moon, Sun, Menu, X, LogIn, LogOut, User } from "lucide-react";
 import { useEffect, useState } from "react";
 import logo from "../assets/logo.png";
+import { supabase } from "../supabase";
+import { useDispatch, useSelector } from "react-redux";
+import { clearSession } from "../redux/authSlice";
+import toast from "react-hot-toast";
 
 const Navbar = () => {
   const [dark, setDark] = useState(
     localStorage.getItem("darkMode") !== "false"
   );
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.auth);
 
   useEffect(() => {
     if (dark) {
@@ -18,6 +24,26 @@ const Navbar = () => {
     }
     localStorage.setItem("darkMode", dark);
   }, [dark]);
+
+  const handleLogin = async () => {
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider: 'google',
+      options: {
+        redirectTo: window.location.origin
+      }
+    });
+    if (error) toast.error(error.message);
+  };
+
+  const handleLogout = async () => {
+    const { error } = await supabase.auth.signOut();
+    if (error) {
+      toast.error(error.message);
+    } else {
+      dispatch(clearSession());
+      toast.success("Logged out successfully");
+    }
+  };
 
   return (
     <nav className="w-full h-[70px] flex justify-center items-center p-4 bg-gray-800/90 dark:bg-black/90 backdrop-blur-md sticky top-0 z-50 border-b border-gray-700 dark:border-gray-800 transition-all duration-300">
@@ -51,6 +77,7 @@ const Navbar = () => {
           </div>
 
           <div className="flex items-center gap-x-2 md:gap-x-4">
+            {/* Dark Mode Toggle */}
             <button
               onClick={() => setDark(!dark)}
               className="p-2 md:p-2.5 rounded-xl bg-gray-700 dark:bg-gray-800 hover:bg-gray-600 dark:hover:bg-gray-700 transition shadow-lg group"
@@ -62,6 +89,41 @@ const Navbar = () => {
                 <Moon size={20} className="text-blue-400 group-hover:-rotate-12 transition-transform" />
               )}
             </button>
+
+            {/* Auth Actions */}
+            <div className="hidden md:flex items-center">
+              {user ? (
+                <div className="flex items-center gap-x-4">
+                  <div className="flex items-center gap-x-2 bg-gray-700 dark:bg-gray-800 px-3 py-1.5 rounded-xl border border-gray-600 dark:border-gray-700 shadow-sm">
+                    <div className="w-7 h-7 rounded-full bg-blue-500 flex items-center justify-center text-white overflow-hidden">
+                      {user.user_metadata?.avatar_url ? (
+                        <img src={user.user_metadata.avatar_url} alt="User" />
+                      ) : (
+                        <User size={16} />
+                      )}
+                    </div>
+                    <span className="text-white text-sm font-medium hidden lg:block">
+                      {user.user_metadata?.full_name || user.email}
+                    </span>
+                  </div>
+                  <button
+                    onClick={handleLogout}
+                    className="p-2.5 rounded-xl bg-red-500/10 hover:bg-red-500/20 text-red-500 transition border border-red-500/20"
+                    title="Logout"
+                  >
+                    <LogOut size={20} />
+                  </button>
+                </div>
+              ) : (
+                <button
+                  onClick={handleLogin}
+                  className="flex items-center gap-x-2 px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold transition shadow-lg shadow-blue-500/20"
+                >
+                  <LogIn size={18} />
+                  <span>Login</span>
+                </button>
+              )}
+            </div>
 
             {/* Mobile Menu Toggle */}
             <button
@@ -92,6 +154,27 @@ const Navbar = () => {
                 {link.title}
               </NavLink>
             ))}
+
+            {/* Mobile Auth Button */}
+            <div className="pt-4 border-t border-gray-700 dark:border-gray-800">
+              {user ? (
+                <button
+                  onClick={handleLogout}
+                  className="w-full flex items-center justify-center gap-x-2 p-3 rounded-xl bg-red-500/10 text-red-500 font-semibold"
+                >
+                  <LogOut size={20} />
+                  <span>Logout</span>
+                </button>
+              ) : (
+                <button
+                  onClick={handleLogin}
+                  className="w-full flex items-center justify-center gap-x-2 p-3 rounded-xl bg-blue-600 text-white font-semibold"
+                >
+                  <LogIn size={20} />
+                  <span>Login with Google</span>
+                </button>
+              )}
+            </div>
           </div>
         </div>
       )}
@@ -100,6 +183,7 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
 
 
 

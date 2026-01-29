@@ -5,6 +5,10 @@ import ViewPaste from "./components/ViewPaste";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import { Analytics } from "@vercel/analytics/react";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { supabase } from "./supabase";
+import { setSession } from "./redux/authSlice";
 
 const router = createBrowserRouter([
   {
@@ -46,6 +50,24 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    // 1. Check current session
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      dispatch(setSession(session));
+    });
+
+    // 2. Listen for auth changes
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event, session) => {
+      dispatch(setSession(session));
+    });
+
+    return () => subscription.unsubscribe();
+  }, [dispatch]);
+
   return (
     <>
       <RouterProvider router={router} />
