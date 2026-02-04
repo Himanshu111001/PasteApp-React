@@ -4,7 +4,10 @@ import Paste from "./components/Paste";
 import ViewPaste from "./components/ViewPaste";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+import Privacy from "./components/Privacy";
+import Terms from "./components/Terms";
 import { Analytics } from "@vercel/analytics/react";
+
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { supabase } from "./supabase";
@@ -49,7 +52,32 @@ const router = createBrowserRouter([
       </div>
     ),
   },
+  {
+    path: "/privacy",
+    element: (
+      <div className="w-full min-h-screen flex flex-col bg-white dark:bg-gray-900 transition-colors duration-300">
+        <Navbar />
+        <div className="flex-grow flex flex-col">
+          <Privacy />
+        </div>
+        <Footer />
+      </div>
+    ),
+  },
+  {
+    path: "/terms",
+    element: (
+      <div className="w-full min-h-screen flex flex-col bg-white dark:bg-gray-900 transition-colors duration-300">
+        <Navbar />
+        <div className="flex-grow flex flex-col">
+          <Terms />
+        </div>
+        <Footer />
+      </div>
+    ),
+  },
 ]);
+
 
 function App() {
   const dispatch = useDispatch();

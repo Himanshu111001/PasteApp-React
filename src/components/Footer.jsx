@@ -11,7 +11,14 @@ const Footer = () => {
                     Built with ❤️ by <span className="text-white">Himanshu</span>
                 </div>
 
+                {/* Middle: Links */}
+                <div className="flex gap-x-4 text-sm font-medium">
+                    <a href="/privacy" className="text-gray-400 hover:text-white transition-colors">Privacy</a>
+                    <a href="/terms" className="text-gray-400 hover:text-white transition-colors">Terms</a>
+                </div>
+
                 {/* Right Side: Social Links */}
+
                 <div className="flex items-center gap-x-6">
                     <a
                         href="https://github.com/Himanshu111001"
