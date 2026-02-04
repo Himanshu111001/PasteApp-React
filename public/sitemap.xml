@@ -4,14 +4,12 @@
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
             http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
-
+<!-- created dynamically based on SITE_URL -->
 
 <url>
-  <loc>https://pastesapp.vercel.app/</loc>
-  <lastmod>2025-03-26T10:58:33+00:00</lastmod>
+  <loc>https://pastes.in/</loc>
+  <lastmod>2026-02-04T06:49:13.750Z</lastmod>
   <priority>1.0</priority>
 </url>
-
 
 </urlset>
