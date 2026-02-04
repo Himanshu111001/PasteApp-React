@@ -5,8 +5,22 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Default to https://pastes.in if SITE_URL is not set
-const SITE_URL = process.env.SITE_URL || 'https://pastes.in';
+// Simple .env parser to avoid checking in dotenv dependency
+const envPath = path.resolve(__dirname, '../.env');
+if (fs.existsSync(envPath)) {
+  const envConfig = fs.readFileSync(envPath, 'utf8');
+  envConfig.split('\n').forEach(line => {
+    const match = line.match(/^([^=]+)=(.*)$/);
+    if (match) {
+      const key = match[1].trim();
+      const value = match[2].trim().replace(/^['"]|['"]$/g, ''); // Remove quotes if present
+      process.env[key] = value;
+    }
+  });
+}
+
+// Default to https://pastes.in if VITE_SITE_URL is not set
+const SITE_URL = process.env.VITE_SITE_URL || 'https://pastes.in';
 
 // Helper to remove trailing slash for consistency
 const cleanUrl = (url) => url.replace(/\/$/, '');
